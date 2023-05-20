@@ -3,6 +3,7 @@ const router = express.Router();
 const initializePayment = require('../Controllers/controllers');
 
 
-router.post('/paystack', initializePayment.acceptPayment)
+router.post('/acceptpayment', initializePayment.acceptPayment);
+router.get('/verifypayment', initializePayment.verifyPayment);
 
 module.exports = router
