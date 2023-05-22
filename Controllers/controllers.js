@@ -1,16 +1,19 @@
-require('dotenv').config()
+require('dotenv').config();
 const express = require('express');
-const https = require('https')
-// const axios = require('axios');
+const https = require('https');
+
 
 const payStack = {
 
   acceptPayment: async(req, res) => {
     try {
+
+      const email = req.body.email;
+      const amount = req.body.amount;
       // params
       const params = JSON.stringify({
-        "email": "promiseprince01@gmail.com",
-        "amount": 2000 * 100
+        "email": email,
+        "amount": amount * 100
       })
       // options
       const options = {
@@ -24,7 +27,7 @@ const payStack = {
         }
       }
       // client request
-      const req = https.request(options, apiRes => {
+      const clientReq = https.request(options, apiRes => {
         let data = ''
         apiRes.on('data', (chunk) => {
           data += chunk
@@ -36,8 +39,8 @@ const payStack = {
       }).on('error', error => {
         console.error(error)
       })
-      req.write(params)
-      req.end()
+      clientReq.write(params)
+      clientReq.end()
       
     } catch (error) {
       // Handle any errors that occur during the request
@@ -52,10 +55,10 @@ const payStack = {
       const options = {
         hostname: 'api.paystack.co',
         port: 443,
-        path: '/transaction/verify/:380257757',
+        path: '/transaction/verify/:775488184',
         method: 'GET',
         headers: {
-          Authorization: process.env.PUBLIC_KEY,
+          Authorization: process.env.PUBLIC_KEY
         }
       }
       
