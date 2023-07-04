@@ -9,8 +9,7 @@ const payStack = {
   acceptPayment: async(req, res) => {
     try {
 
-      const email = req.body.email;
-      const amount = req.body.amount;
+      const { email, amount } = req.body;
       // params
       const params = JSON.stringify({
         "email": email,
@@ -23,7 +22,7 @@ const payStack = {
         path: '/transaction/initialize',
         method: 'POST',
         headers: {
-          Authorization: process.env.PUBLIC_KEY,
+          Authorization: process.env.SECRET_KEY,
           'Content-Type': 'application/json'
         }
       }
@@ -39,6 +38,7 @@ const payStack = {
         })
       }).on('error', error => {
         console.error(error)
+        return res.status(400).json(error.message);
       })
       clientReq.write(params)
       clientReq.end()
