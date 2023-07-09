@@ -14,9 +14,14 @@ const webhook = (req, res) => {
     if (event && event.event === 'transfer.success') {
       return res.status(200).json({ message: 'Transfer successful' })
     }  
-    } 
+  } 
   
-  res.send(200);
+  res.status(200).json({ 
+    status: 200,
+    event: event.event,
+    message: 'Transfer successful'
+  });
+  
 }
 
 module.exports = webhook;
