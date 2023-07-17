@@ -12,7 +12,9 @@ app.use(bodyParser.json());
 
 // Call the routers 
 app.use(router);
-
+app.get('/home', (req, res) => {
+  res.status(200).json('Welcome, your app is working well');
+})
 
 
 // Start the server
