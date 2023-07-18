@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors')
 const app = express();
 const bodyParser = require('body-parser');
 const router = require('./Router/route')
@@ -7,7 +8,7 @@ const router = require('./Router/route')
 
 
 const port = process.env.PORT || 3001;
-// Parse incoming requests with JSON payloads
+app.use(cors())
 app.use(bodyParser.json());
 
 // Call the routers 
