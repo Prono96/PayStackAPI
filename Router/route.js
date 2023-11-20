@@ -6,6 +6,6 @@ const useWebHook = require('../Controllers/webhook')
 
 router.post('/acceptpayment', initializePayment.acceptPayment);
 router.post('/webhook', useWebHook)
-router.get('/verifypayment', initializePayment.verifyPayment);
+router.get('/verifypayment/:reference', initializePayment.verifyPayment);
 
 module.exports = router
